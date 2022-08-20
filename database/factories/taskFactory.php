@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\task>
  */
-class TaskFactory extends Factory
+class taskFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,10 @@ class TaskFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "title" => fake()->name(),
+            "description" => fake()->city,
+            "assigned_by_id" => 1,
+            "assigned_to_id" =>  1,
         ];
     }
 }

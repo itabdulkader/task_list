@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('assigned_by_id')->references('id')->on('admins')->cascadeOnDelete();
             $table->foreignId('assigned_to_id')->references('id')->on('users')->cascadeOnDelete();
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

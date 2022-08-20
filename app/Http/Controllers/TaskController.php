@@ -95,7 +95,6 @@ class TaskController extends Controller
     {
         $task->delete();
 
-
         return redirect()->route('tasks.index')
             ->withSuccess(__('Task deleted successfully.'));
     }
@@ -111,4 +110,6 @@ class TaskController extends Controller
 
         return view('tasks.statistics', compact('users'));
     }
+
+
 }
