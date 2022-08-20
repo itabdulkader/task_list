@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class task extends Model
 {
     use HasFactory;
+
+    protected $fillable= ["title","description","assigned_by_id","assigned_to_id"];
 }

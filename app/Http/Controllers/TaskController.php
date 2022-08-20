@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoretaskRequest;
 use App\Http\Requests\UpdatetaskRequest;
+use App\Models\Admin;
 use App\Models\task;
+use App\Models\User;
 
 class TaskController extends Controller
 {
@@ -15,7 +17,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        $tasks = task::latest()->paginate(10);
+
+        return view('tasks.index', compact('tasks'));
     }
 
     /**
@@ -25,7 +29,10 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::pluck("name","id")->toArray();
+        $admins = Admin::pluck("name","id")->toArray();
+
+        return view("tasks.create")->with(compact("users","admins"));
     }
 
     /**
@@ -34,9 +41,13 @@ class TaskController extends Controller
      * @param  \App\Http\Requests\StoretaskRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoretaskRequest $request)
+    public function store(Task $task, StoretaskRequest $request)
     {
-        //
+
+        $task->create($request->all());
+
+        return redirect()->route('tasks.index')
+            ->withSuccess(__('Task created successfully.'));
     }
 
     /**
@@ -81,6 +92,10 @@ class TaskController extends Controller
      */
     public function destroy(task $task)
     {
-        //
+        $task->delete();
+
+
+        return redirect()->route('tasks.index')
+            ->withSuccess(__('Task deleted successfully.'));
     }
 }

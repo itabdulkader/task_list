@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreadminRequest;
 use App\Http\Requests\UpdateadminRequest;
-use App\Models\admin;
+use App\Models\Admin;
 
 class AdminController extends Controller
 {
@@ -42,7 +42,7 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\admin  $admin
+     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
     public function show(admin $admin)
@@ -53,7 +53,7 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\admin  $admin
+     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
     public function edit(admin $admin)
@@ -65,7 +65,7 @@ class AdminController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateadminRequest  $request
-     * @param  \App\Models\admin  $admin
+     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateadminRequest $request, admin $admin)
@@ -76,7 +76,7 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\admin  $admin
+     * @param  \App\Models\Admin  $admin
      * @return \Illuminate\Http\Response
      */
     public function destroy(admin $admin)
