@@ -29,7 +29,7 @@
                 <th scope="col" width="15%">description</th>
                 <th scope="col" width="10%">Admin Name</th>
                 <th scope="col" width="10%">Assigned User</th>
-                <th scope="col" width="1%" colspan="3"></th>
+
             </tr>
             </thead>
             <tbody>
@@ -40,11 +40,7 @@
                     <td>{{ $task->description }}</td>
                     <td>{{ @$task->admin->name }}</td>
                     <td>{{ @$task->user->name }}</td>
-                    <td>
-                        {!! Form::open(['method' => 'DELETE','route' => ['tasks.destroy', $task->id],'style'=>'display:inline']) !!}
-                        {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                        {!! Form::close() !!}
-                    </td>
+
                 </tr>
             @endforeach
             </tbody>
