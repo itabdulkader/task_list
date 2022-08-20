@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoretaskRequest;
 use App\Http\Requests\UpdatetaskRequest;
 use App\Models\Admin;
+use App\Models\Statistics;
 use App\Models\task;
 use App\Models\User;
 
@@ -18,7 +19,6 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = task::with("user:id,name")->with("admin:id,name")->latest()->paginate(10);
-
 
         return view('tasks.index', compact('tasks'));
     }
@@ -45,7 +45,9 @@ class TaskController extends Controller
     public function store(Task $task, StoretaskRequest $request)
     {
 
-        $task->create($request->all());
+        $task = $task->create($request->all());
+
+        Statistics::updateOrCreate(["user_id"=>$task->assigned_to_id],["user_name"=>User::find($task->assigned_to_id)->name??"","tasks_count"=> \DB::raw('tasks_count + 1')]);
 
         return redirect()->route('tasks.index')
             ->withSuccess(__('Task created successfully.'));
@@ -106,9 +108,13 @@ class TaskController extends Controller
      */
     public function statistics()
     {
-        $users = User::withCount("tasks")->having("tasks_count",">",0)->orderBy('tasks_count', 'desc')->get()->take(10);
+        // method 1 by query
+        // $statistics= User::withCount("tasks")->having("tasks_count",">",0)->orderBy('tasks_count', 'desc')->get()->take(10);
 
-        return view('tasks.statistics', compact('users'));
+        // method 2 by db table
+        $statistics=  Statistics::orderBy('tasks_count', 'desc')->get()->take(10);
+
+        return view('tasks.statistics', compact('statistics'));
     }
 
 

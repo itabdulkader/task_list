@@ -13,11 +13,11 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($users as $user)
+            @foreach($statistics as $record)
                 <tr>
-                    <th scope="row">{{ $user->id }}</th>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->tasks_count }}</td>
+                    <th scope="row">{{ $record->id }}</th>
+                    <td>{{ $record->user_name }}</td>
+                    <td>{{ $record->tasks_count }}</td>
                 </tr>
             @endforeach
             </tbody>
