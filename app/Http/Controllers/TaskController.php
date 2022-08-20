@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoretaskRequest;
 use App\Http\Requests\UpdatetaskRequest;
+use App\Jobs\statisticsJob;
 use App\Models\Admin;
 use App\Models\Statistics;
 use App\Models\task;
@@ -47,7 +48,7 @@ class TaskController extends Controller
 
         $task = $task->create($request->all());
 
-        Statistics::updateOrCreate(["user_id"=>$task->assigned_to_id],["user_name"=>User::find($task->assigned_to_id)->name??"","tasks_count"=> \DB::raw('tasks_count + 1')]);
+        statisticsJob::dispatch($task);
 
         return redirect()->route('tasks.index')
             ->withSuccess(__('Task created successfully.'));
