@@ -99,4 +99,16 @@ class TaskController extends Controller
         return redirect()->route('tasks.index')
             ->withSuccess(__('Task deleted successfully.'));
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function statistics()
+    {
+        $users = User::withCount("tasks")->having("tasks_count",">",0)->orderBy('tasks_count', 'desc')->get()->take(10);
+
+        return view('tasks.statistics', compact('users'));
+    }
 }

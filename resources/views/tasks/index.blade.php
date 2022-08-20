@@ -3,11 +3,20 @@
 @section('content')
     <div class="bg-light p-4 rounded">
         <h1>tasks</h1>
-        <div class="lead">
+
+        <div class="lead ">
             Manage your tasks here.
-            <a href="{{ route('tasks.create') }}" class="btn btn-primary btn-sm float-right">Add new task</a>
         </div>
 
+        <br />
+        <div class="container">
+            <a href="{{ route('tasks.create') }}" class="btn btn-primary btn-sm float-right">Add new task</a>
+
+            <a href="{{ route('statistics') }}" class="btn btn-info btn-sm float-left">Statistics</a>
+        </div>
+
+        <br />
+        <br />
         <div class="mt-2">
             @include('layouts.partials.messages')
         </div>

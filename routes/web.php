@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::resource('tasks', TaskController::class );
+Route::get('statistics', [TaskController::class,"statistics"] )->name("statistics");
