@@ -9,6 +9,7 @@ use App\Models\Admin;
 use App\Models\Statistics;
 use App\Models\task;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 
 class TaskController extends Controller
 {
@@ -31,7 +32,10 @@ class TaskController extends Controller
      */
     public function create()
     {
-        $users = User::pluck("name","id")->toArray();
+        $users = Cache::remember('users', 24 * 60, function () {
+            return  User::pluck("name","id")->toArray();
+        });
+
         $admins = Admin::pluck("name","id")->toArray();
 
         return view("tasks.create")->with(compact("users","admins"));
