@@ -16,9 +16,10 @@
             <thead>
             <tr>
                 <th scope="col" width="1%">#</th>
-                <th scope="col" width="15%">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col" width="10%">taskname</th>
+                <th scope="col" width="15%">title</th>
+                <th scope="col" width="15%">description</th>
+                <th scope="col" width="10%">Admin Name</th>
+                <th scope="col" width="10%">Assigned User</th>
                 <th scope="col" width="1%" colspan="3"></th>
             </tr>
             </thead>
@@ -26,11 +27,10 @@
             @foreach($tasks as $task)
                 <tr>
                     <th scope="row">{{ $task->id }}</th>
-                    <td>{{ $task->name }}</td>
-                    <td>{{ $task->email }}</td>
-                    <td>{{ $task->taskname }}</td>
-                    <td><a href="{{ route('tasks.show', $task->id) }}" class="btn btn-warning btn-sm">Show</a></td>
-                    <td><a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-info btn-sm">Edit</a></td>
+                    <td>{{ $task->title }}</td>
+                    <td>{{ $task->description }}</td>
+                    <td>{{ @$task->admin->name }}</td>
+                    <td>{{ @$task->user->name }}</td>
                     <td>
                         {!! Form::open(['method' => 'DELETE','route' => ['tasks.destroy', $task->id],'style'=>'display:inline']) !!}
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
